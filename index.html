@@ -1,0 +1,37 @@
+<html ng-app="nodeFileUploadApp">
+<head>
+    <!-- angulat-->
+    <script src="lib/angular.min.js"></script>
+    <script src="js/controller.js"></script>
+    
+    <!-- jquery -->
+    <script src="lib/jquery-2.1.0.min.js"></script>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"/>
+    <script src="lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+
+<body ng-controller="NodeFileUploadAppController">
+    <div class="container">
+        <nav class="navbar navbar-default" role="naviagtion">
+            <div class="container-fluid">
+                <button type="button" class="btn btn-default navbar-btn" style="float: left" ng-show="path !== '/'" ng-click="listDir(getParentPath(path))">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </button>
+
+                <p class="navbar-text">Path: {{path}}</p>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col-md-2 col-xs-3" ng-repeat="file in files" style="margin-top: 5px; text-align: center">
+                <div  ng-click="listDir(path + '/' + file.name)">
+                    <h3>
+                        <span class="glyphicon {{file.isDirectory ? 'glyphicon-folder-open' : 'glyphicon-file'}}"></span>
+                    </h3>
+                    <h5>{{file.name}}</h5>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
