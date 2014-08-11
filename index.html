@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"/>
     <script src="lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="css/style.css"/>
+
 <body ng-controller="NodeFileUploadAppController">
     <div class="container">
         <nav class="navbar navbar-default" role="naviagtion">
@@ -21,15 +23,23 @@
                 </button>
 
                 <p class="navbar-text">Path: {{path}}</p>
+
+                <div class="dropdown navbar-btn navbar-right">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="showHiddenFile = !showHiddenFile">{{showHiddenFile ? 'Hide' : 'Show'}} hidden files</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
         <div class="row">
-            <div class="col-md-2 col-xs-3" ng-repeat="file in files" style="margin-top: 5px; text-align: center">
-                <div  ng-click="listDir(path + '/' + file.name)">
-                    <h3>
-                        <span class="glyphicon {{file.isDirectory ? 'glyphicon-folder-open' : 'glyphicon-file'}}"></span>
-                    </h3>
-                    <h5>{{file.name}}</h5>
+            <div class="col-md-2 col-xs-3 file" ng-class="{hoverPointer: file.isDirectory}" ng-repeat="file in files" ng-show="file.name[0] !== '.' || showHiddenFile" ng-click="fileClicked(file)">
+                <h3>
+                    <span class="glyphicon {{file.isDirectory ? 'glyphicon-folder-open' : 'glyphicon-file'}}"></span>
+                </h3>
+                <h5>{{file.name}}</h5>
             </div>
         </div>
     </div>

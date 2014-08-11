@@ -2,7 +2,8 @@ var nodeFileUploadApp = angular.module('nodeFileUploadApp', []);
 
 nodeFileUploadApp.controller("NodeFileUploadAppController", function($scope, $http, $location) {
     $scope.path = "/";
-    
+    $scope.showHiddenFile = false;
+
     $scope.listDir = function(path) {
         $http({
             method: "GET",
@@ -10,6 +11,7 @@ nodeFileUploadApp.controller("NodeFileUploadAppController", function($scope, $ht
         }).success(function(data, status, headers, config) {
             console.log(data);
             $scope.files = data;
+            path = path.replace("//", "/");
             $scope.path = path;
         }).error(function(data, status, headers, config) {
             console.log("listDir error");
@@ -22,6 +24,12 @@ nodeFileUploadApp.controller("NodeFileUploadAppController", function($scope, $ht
             parentPath = "/";
         return parentPath;
     }
+
+    $scope.fileClicked = function(file) {
+        if (file.isDirectory) {
+            $scope.listDir($scope.path + '/' + file.name)
+        }
+    };
 
     $scope.listDir($scope.path);
 });

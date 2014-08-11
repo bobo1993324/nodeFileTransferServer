@@ -1,0 +1,8 @@
+.hoverPointer:hover {
+    cursor: pointer;
+}
+.file {
+    margin-top: 5px;
+    text-align: center;
+    height: 70px;
+}
