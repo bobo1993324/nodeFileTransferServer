@@ -1,6 +1,10 @@
+var globalScope;
+
+
 var nodeFileUploadApp = angular.module('nodeFileUploadApp', []);
 
 nodeFileUploadApp.controller("NodeFileUploadAppController", function($scope, $http, $location) {
+    globalScope = $scope;
     $scope.path = "/";
     $scope.showHiddenFile = false;
 
@@ -9,7 +13,6 @@ nodeFileUploadApp.controller("NodeFileUploadAppController", function($scope, $ht
             method: "GET",
             url: "http://" + $location.host() + ":" + $location.port() +"/api/list?path=" + path
         }).success(function(data, status, headers, config) {
-            console.log(data);
             $scope.files = data;
             path = path.replace("//", "/");
             $scope.path = path;

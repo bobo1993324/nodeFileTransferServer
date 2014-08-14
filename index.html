@@ -14,6 +14,11 @@
 
     <link rel="stylesheet" href="css/style.css"/>
 
+    <!-- jquery file upload -->
+    <script src="lib/vendor/jquery.ui.widget.js"></script>
+    <script src="lib/jquery.iframe-transport.js"></script>
+    <script src="lib/jquery.fileupload.js"></script>
+</head>
 <body ng-controller="NodeFileUploadAppController">
     <div class="container">
         <nav class="navbar navbar-default" role="naviagtion">
@@ -32,6 +37,11 @@
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="showHiddenFile = !showHiddenFile">{{showHiddenFile ? 'Hide' : 'Show'}} hidden files</a></li>
                     </ul>
                 </div>
+                <form id="uploadForm" class="btn btn-default navbar-right navbar-btn" style="position: relative; margin-right: 10px">
+                    <input id="uploadPathInput" type="text" class="ng-hide" name="path" value="{{path}}"/>
+                    <input id="uploadInput" type="file" name="file" data-url="/api/upload" multiple/>
+                    <span class="glyphicon glyphicon-upload"></span>
+                </form>
             </div>
         </nav>
         <div class="row">
@@ -43,5 +53,6 @@
             </div>
         </div>
     </div>
+    <script src="js/upload.js"></script>
 </body>
 </html>
